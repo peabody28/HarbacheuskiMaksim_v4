@@ -91,7 +91,9 @@ std::ostream& operator << (std::ostream& out, ComplexNumberSquare c)
 
 int main()
 {
+
     ComplexNumber a(2.5, 19.2);
+
     ComplexNumber b(16, 12);
 
     std::cout << "a = " << a << std::endl;
@@ -112,6 +114,7 @@ int main()
     std::cout << "(a = b) a = " << a << std::endl;
 
     a = ComplexNumber(6, -9);
+    std::cout << "a = " << a << std::endl;
     bool tr = b == b;
     std::cout << "b == b " << tr << std::endl;
     bool fl = a == b;
