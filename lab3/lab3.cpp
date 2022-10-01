@@ -1,156 +1,220 @@
-// number 4
+// number 5
 #include <iostream>
-#include <stdlib.h> 
 
-class Page
+
+enum EngineType
 {
-private:
-    int Number;
-    int StrCount;
-
-public:
-    Page()
-    {
-
-    }
-
-    int GetStrCount()
-    {
-        return StrCount;
-    }
-
-    friend class Book;
+	Diesel,
+	Petrol
 };
 
-class Book
+enum PlaneType
 {
-private:
-    Page* Pages;
-    int PagesCount;
-    Page* Bookmark;
+	Passenger,
+	Military
+};
+
+enum TransportCreater
+{
+	Opel,
+	AirJet
+};
+
+
+std::ostream& operator<<(std::ostream& out, const PlaneType value) {
+
+	switch (value)
+	{
+	case 0:
+		return out << "Passenger";
+		break;
+	case 1:
+		return out << "Military";
+		break;
+	}
+}
+
+std::ostream& operator<<(std::ostream& out, const EngineType value) {
+
+	switch (value) {
+	case 0:
+		return out << "Diesel";
+		break;
+	case 1:
+		return out << "Petrol";
+		break;
+	}
+}
+
+std::ostream& operator<<(std::ostream& out, const TransportCreater value) {
+
+	switch (value) {
+	case 0:
+		return out << "Opel";
+		break;
+	case 1:
+		return out << "AirJet";
+		break;
+	}
+}
+
+
+class Transport
+{
+protected:
+	TransportCreater Creater;
+
+public:
+	Transport()
+	{
+
+	}
+
+	Transport(TransportCreater _creater)
+	{
+		Creater = _creater;
+	}
+
+	virtual void PrintData()
+	{
+		std::cout << Creater << std::endl;
+	}
+
+	~Transport() {}
+};
+
+class Car : public virtual Transport
+{
+protected:
+	virtual EngineType GetEngineType() = 0;
 
 public:
 
-    Book()
-    {
-        Pages = NULL;
-    }
+	Car()
+	{
 
-    Book(int count)
-    {
-        Pages = new Page[count];
+	}
 
-        int numOfStr = rand() % 1000;
-        for (int i = 0; i < count; i++)
-        {
-            Pages[i].StrCount = numOfStr;
-            Pages[i].Number = i + 1;
-        }
-        
-        PagesCount = count;
-        Bookmark = Pages;
-    }
+	Car(TransportCreater _creater)
+	{
+		Creater = _creater;
+	}
 
-    Book(Book& bk)
-    {
-        if (!bk.PagesCount)
-        {
-            Pages = NULL;
-            return;
-        }
+	void PrintData() override
+	{
+		std::cout << Creater << std::endl;
+		std::cout <<  GetEngineType() << std::endl;
+	}
 
-        Pages = new Page[bk.PagesCount];
-        PagesCount = bk.PagesCount;
+	~Car() {}
+};
 
-        for(int i = 0; i < bk.PagesCount; i++)
-            Pages[i] = bk.Pages[i];
+class Plane : public virtual Transport {
+protected:
+	PlaneType type;
 
-        Bookmark = Pages + bk.Bookmark->Number-1;
-    }
+public:
+	Plane(PlaneType _type, TransportCreater _creater)
+	{
+		type = _type;
+		Creater = _creater;
+	}
 
-    ~Book()
-    {
-        delete[] Pages;
-    }
+	void PrintData() override
+	{
+		std::cout << Creater << std::endl;
+		std::cout << type << std::endl;
+	}
 
-    Page* OpenPage(int number)
-    {
-        return number <= PagesCount ? &Pages[number - 1] : NULL;
-    }
+	~Plane() {}
+};
 
-    void PrintPageStrCount(int pageNumber)
-    {
-        std::cout << Pages[pageNumber - 1].GetStrCount() << std::endl;
-    }
+class OpelAstra : public Car
+{
+private:
+	unsigned short mileage;
 
-    void SetBookMark(int pageCount)
-    {
-        Bookmark = Pages + pageCount - 1;
-    }
+	EngineType GetEngineType() override { return Diesel; }
 
-    int GetPagesCount()
-    {
-        return PagesCount;
-    }
+public:
+	OpelAstra(unsigned short _mileage) : Car(Opel)
+	{
+		mileage = _mileage;
+	}
 
-    void FindBookmark()
-    {
-        std::cout << Bookmark->Number << std::endl;
-    }
+	void PrintData() override
+	{
+		std::cout << Creater << std::endl;
+		std::cout << GetEngineType() << std::endl;
+		std::cout << mileage << std::endl;
+	}
 
-    void* operator new(size_t size)
-    {
-        return malloc(size);
-    }
+	~OpelAstra()
+	{
 
-    void operator delete(void* ptr)
-    {
-        Book* bk = (Book*)ptr;
-        //free(bk->Pages); must be executed in destructor
-        free(bk);
-    }
+	}
+};
+
+class Jet : public Plane
+{
+private:
+	unsigned int maxHeight;
+
+public:
+	Jet(unsigned int _maxHeight = 20000) : Plane(Military, AirJet)
+	{
+		maxHeight = _maxHeight;
+	}
+
+	void PrintData() override
+	{
+		std::cout << Creater << std::endl;
+		std::cout << type << std::endl;
+		std::cout << maxHeight << std::endl;
+	}
+
+	~Jet()
+	{
+
+	}
+};
+
+
+class AirCar : public Plane, public Car
+{
+private:
+	int maxSpeed;
+
+	EngineType GetEngineType() override { return Petrol; }
+
+public:
+	AirCar(unsigned short _maxSpeed = 300) : Plane(Passenger, AirJet)
+	{
+		maxSpeed = _maxSpeed;
+	}
+
+	void PrintData() override
+	{
+		std::cout << Creater << std::endl;
+		std::cout << GetEngineType() << std::endl;
+		std::cout << type << std::endl;
+		std::cout << maxSpeed << std::endl;
+	}
+
+	~AirCar()
+	{
+
+	}
 };
 
 
 int main()
 {
-    Book* bk = new Book(rand()%100);
-    Book* bk2 = new Book(*bk);
+	OpelAstra cc(20);
+	AirCar aircar(200);
 
-    bk->SetBookMark(rand() % bk->GetPagesCount());
-
-    bk->FindBookmark();
-    bk2->FindBookmark();
-
-    delete bk;
-    delete bk2;
-
-    std::cout << "Input books count" << std::endl;
-    int booksCount;
-    std::cin >> booksCount;
-
-    Book* library = new Book[booksCount];
-    for (int i = 0; i < booksCount; i++)
-        library[i] = *(new Book(rand() % 1000));
-
-    while (1)
-    {
-        std::cout << "Select book (number)" << std::endl;
-        int bookNum;
-        std::cin >> bookNum;
-        if (bookNum == -1)
-            break;
-        Book bk = library[bookNum - 1];
-
-        std::cout << "Select page number for opening" << std::endl;
-        int pageNum;
-        std::cin >> pageNum;
-        Page* pg = bk.OpenPage(pageNum);
-
-        std::cout << pg->GetStrCount() << std::endl;
-    }
-
-    delete[] library;
-
-    return 0;
+	aircar.PrintData();
+	
+	return 0;
 }
+
