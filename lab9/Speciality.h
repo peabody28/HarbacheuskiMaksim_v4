@@ -2,17 +2,20 @@
 #include <vector>
 #include "Course.h"
 
-class Speciality
+namespace univ
 {
-private:
-	std::vector<Course*> courses;
-public:
-	Speciality() {}
+	class Speciality
+	{
+	private:
+		std::vector<Course*> courses;
+	public:
+		Speciality() {}
 
-	Speciality(std::vector<Course*> _courses);
+		Speciality(std::vector<Course*> _courses);
 
-	std::vector<Course*> GetCourses();
+		std::vector<Course*> GetCourses();
 
-	~Speciality() {}
-};
+		~Speciality() {}
+	};
+}
 

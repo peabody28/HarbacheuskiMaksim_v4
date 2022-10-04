@@ -6,30 +6,42 @@
 #include "Student.h"
 #include "Tutor.h"
 #include "University.h"
+using namespace univ;
 
 int main()
 {
-    Course first = Course(1);
-    Course second = Course(2);
+    int courseCount;
+    std::cout << "Input courses count:";
+    std::cin >> courseCount;
     std::vector<Course*> courses;
-    courses.push_back(&first);
-    courses.push_back(&second);
+    for (int i = 0; i < courseCount; i++)
+        courses.push_back(new Course(i + 1));
 
     Speciality sp = Speciality(courses);
     Group gr = Group(&sp);
-    Tutor t = Tutor(&gr, "Alex");
 
-    Student st = Student(&gr, "Max");
+    std::cout << "Input tutor name:";
+    std::string name;
+    std::cin >> name;
+    Tutor t = Tutor(&gr, name);
+
+    std::cout << "Input student name:";
+    std::cin >> name;
+    Student st = Student(&gr, name);
 
     std::vector<Student*> students;
     students.push_back(&st);
-
     University u = University(students);
 
-    std::cout << st.GetName() << std::endl;
+    for (auto student : u.GetStudents())
+    {
+        std::cout << "Student name: " << student->GetName() << std::endl;
 
-    std::cout << st.GetGroup()->GetSpeciality()->GetCourses()[0]->GetNumber() << std::endl;
-    std::cout << st.GetGroup()->GetSpeciality()->GetCourses()[1]->GetNumber() << std::endl;
+        for (auto course : student->GetGroup()->GetSpeciality()->GetCourses())
+            std::cout << course->GetNumber() << std::endl;
+    }
+
+    std::cout << "Tutor name: " << t.GetName() << std::endl;
 
     return 0;
 }

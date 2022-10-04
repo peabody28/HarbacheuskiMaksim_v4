@@ -1,4 +1,6 @@
 #include "Speciality.h"
+using namespace univ;
+
 
 Speciality::Speciality(std::vector<Course*> _courses) { courses = _courses; }
 

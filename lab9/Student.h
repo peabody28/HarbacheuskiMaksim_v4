@@ -3,17 +3,20 @@
 #include <string>
 #include "Group.h"
 
-class Student : public Person
+namespace univ
 {
-private:
-	Group* group;
-public:
-	Student() {}
+	class Student : public Person
+	{
+	private:
+		Group* group;
+	public:
+		Student() {}
 
-	Student(Group* _spec, std::string _name);
+		Student(Group* _spec, std::string _name);
 
-	Group* GetGroup();
+		Group* GetGroup();
 
-	~Student() {}
-};
+		~Student() {}
+	};
+}
 

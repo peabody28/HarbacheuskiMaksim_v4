@@ -1,16 +1,21 @@
 #pragma once
 #include "Speciality.h"
-class Group
+
+namespace univ
 {
-private:
-	Speciality* speciality;
-public:
-	Group() {}
+	class Group
+	{
+	private:
+		Speciality* speciality;
+	public:
+		Group() {}
 
-	Group(Speciality* spec);
+		Group(Speciality* spec);
 
-	Speciality* GetSpeciality();
+		Speciality* GetSpeciality();
 
-	~Group() {}
-};
+		~Group() {}
+	};
+}
+
 

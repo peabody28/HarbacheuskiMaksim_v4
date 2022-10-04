@@ -1,15 +1,20 @@
 #pragma once
-class Course
+
+namespace univ
 {
-private:
-	int number;
-public:
-	Course() {}
+	class Course
+	{
+	private:
+		int number;
+	public:
+		Course() {}
 
-	Course(int _num);
+		Course(int _num);
 
-	int GetNumber();
+		int GetNumber();
 
-	~Course() {}
-};
+		~Course() {}
+	};
+}
+
 

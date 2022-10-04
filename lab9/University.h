@@ -2,17 +2,19 @@
 #include <vector>
 #include "Student.h"
 
-class University
+namespace univ
 {
-private:
-	std::vector<Student*> students;
-public:
-	University() {}
+	class University
+	{
+	private:
+		std::vector<Student*> students;
+	public:
+		University() {}
 
-	University(std::vector<Student*> _students);
+		University(std::vector<Student*> _students);
 
-	std::vector<Student*> GetStudents();
+		std::vector<Student*> GetStudents();
 
-	~University() {}
-};
-
+		~University() {}
+	};
+}

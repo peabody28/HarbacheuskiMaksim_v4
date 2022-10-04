@@ -1,17 +1,20 @@
 #pragma once
 #include <string>
 
-class Person
+namespace univ
 {
-protected:
-	std::string name;
-public:
-	Person() {}
+	class Person
+	{
+	protected:
+		std::string name;
+	public:
+		Person() {}
 
-	Person(std::string _name);
+		Person(std::string _name);
 
-	std::string GetName();
+		std::string GetName();
 
-	~Person() {}
-};
+		~Person() {}
+	};
+}
 
