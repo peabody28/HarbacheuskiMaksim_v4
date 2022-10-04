@@ -1,51 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="university::Speciality" Collapsed="true">
-    <Position X="5.25" Y="1.5" Width="1.5" />
+  <Class Name="univ::Course" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIQAAAAEAAAAAAAAAAAgAAAAAAgAAAAAACAAA=</HashCode>
-      <FileName>Speciality.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="university::Course" Collapsed="true">
-    <Position X="5.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAAAAIAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAQAAAAIAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Course.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="university::Group" Collapsed="true">
-    <Position X="7" Y="0.5" Width="1.5" />
+  <Class Name="univ::Group" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAQQCAAAAAAAQQAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <HashCode>AAIAAEAAgAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Group.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="university::Person" Collapsed="true">
-    <Position X="1.75" Y="0.5" Width="1.5" />
+  <Class Name="univ::Person" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAABAQAAAAAAAAAAAAAAEAAAAAAAAAAAABAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAIAAAAAAABAA=</HashCode>
       <FileName>Person.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="university::Student" Collapsed="true">
-    <Position X="0.5" Y="1.75" Width="1.5" />
+  <Class Name="univ::Speciality" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAABAAwAAAAAAAAAAAAAAAAQAQAAAAAAAAEAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAEAAAAAACAAA=</HashCode>
+      <FileName>Speciality.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="univ::Student" Collapsed="true">
+    <Position X="1" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAQAAAAAAABAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
       <FileName>Student.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="university::Tutor" Collapsed="true">
-    <Position X="2.75" Y="1.75" Width="1.5" />
+  <Class Name="univ::Tutor" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAABAAABAAABAQAA=</HashCode>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAEAAAAAAAAAAg=</HashCode>
       <FileName>Tutor.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="university::University" Collapsed="true">
-    <Position X="7" Y="1.5" Width="1.5" />
+  <Class Name="univ::University" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAQAAAAIAAAAAAAACAAA=</HashCode>
       <FileName>University.h</FileName>
     </TypeIdentifier>
   </Class>
