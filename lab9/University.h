@@ -1,15 +1,18 @@
 #pragma once
-#include <string>
+#include <vector>
+#include "Student.h"
 
-namespace university
+class University
 {
-	class University
-	{
-	private:
-		std::string title;
-	public:
-		University();
-		University(std::string _title);
-		std::string GetTitle();
-	};
-}
+private:
+	std::vector<Student*> students;
+public:
+	University() {}
+
+	University(std::vector<Student*> _students);
+
+	std::vector<Student*> GetStudents();
+
+	~University() {}
+};
+

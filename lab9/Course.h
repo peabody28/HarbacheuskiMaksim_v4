@@ -1,14 +1,15 @@
 #pragma once
-
-namespace university
+class Course
 {
-	class Course
-	{
-	protected:
-		unsigned int number;
-	public:
-		Course();
-		Course(unsigned int _number);
-		unsigned int GetNumber();
-	};
-}
+private:
+	int number;
+public:
+	Course() {}
+
+	Course(int _num);
+
+	int GetNumber();
+
+	~Course() {}
+};
+

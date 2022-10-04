@@ -1,13 +1,5 @@
 #include "Group.h"
-#include "Student.h"
-#include "Tutor.h"
-#include <vector>
-using namespace university;
 
-Group::Group() {}
+Group::Group(Speciality* spec) { speciality = spec; }
 
-Tutor Group::GetTutor() { return tutor; }
-
-unsigned long long Group::GetNumber() { return number; }
-
-std::vector<Student> Group::GetStudents() { return students; }
+Speciality* Group::GetSpeciality() { return speciality; }

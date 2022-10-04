@@ -3,33 +3,33 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Student.h"
+#include "Tutor.h"
+#include "University.h"
 
 int main()
 {
-    /*
-    University university = University("BSUIR");
+    Course first = Course(1);
+    Course second = Course(2);
+    std::vector<Course*> courses;
+    courses.push_back(&first);
+    courses.push_back(&second);
 
-    std::vector<std::string> sciencesOnThirdSem = std::vector<std::string>{ "Math", "C++", "Assembler" };
-    std::vector<std::vector<std::string>, unsigned int> courseSciences;
-    courseSciences[2] = sciencesOnThirdSem;
+    Speciality sp = Speciality(courses);
+    Group gr = Group(&sp);
+    Tutor t = Tutor(&gr, "Alex");
 
-    Speciality spec = Speciality("CMSaN", &university, courseSciences);
-    Course course = Course(2);
-    Student student = Student(18, "Maksim", &spec, &course, 8.2);
+    Student st = Student(&gr, "Max");
 
-    std::string name = student.GetName();
-    unsigned int age = student.GetAge();
-    Speciality* stSpeciality = student.GetSpeciality();
-    Course* stCourse = student.GetCurrentCourse();
-    float rating = student.GetRating();
+    std::vector<Student*> students;
+    students.push_back(&st);
 
-    std::string spTitle = stSpeciality->GetTitle();
-    University* spUniversity = stSpeciality->GetUniversity();
-    std::vector<std::string> spSciences = stSpeciality->GetSciences(*stCourse);
+    University u = University(students);
 
-    unsigned int stCourseNumber = stCourse->GetNumber();
+    std::cout << st.GetName() << std::endl;
 
-    std::string unTitle = spUniversity->GetTitle();
-    */
+    std::cout << st.GetGroup()->GetSpeciality()->GetCourses()[0]->GetNumber() << std::endl;
+    std::cout << st.GetGroup()->GetSpeciality()->GetCourses()[1]->GetNumber() << std::endl;
+
     return 0;
 }

@@ -1,22 +1,19 @@
-﻿#pragma once
-#include "Speciality.h"
-#include "Course.h"
+#pragma once
 #include "Person.h"
 #include <string>
+#include "Group.h"
 
-namespace university
+class Student : public Person
 {
-	class Student : public Person
-	{
-	private:
-		Speciality speciality;
-		Course currentCourse;
-		float rating;
-	public:
-		Student();
-		Student(unsigned int _age, std::string _name, Speciality _speciality, Course _course, float _rating);
-		float GetRating();
-		Course GetCurrentCourse();
-		Speciality GetSpeciality();
-	};
-}
+private:
+	Group* group;
+public:
+	Student() {}
+
+	Student(Group* _spec, std::string _name);
+
+	Group* GetGroup();
+
+	~Student() {}
+};
+

@@ -1,13 +1,5 @@
-#include <string>
 #include "University.h"
 
-using namespace university;
+University::University(std::vector<Student*> _sts) { students = _sts; }
 
-University::University() {}
-
-University::University(std::string _title)
-{
-	title = _title;
-}
-
-std::string University::GetTitle() { return title; }
+std::vector<Student*> University::GetStudents() { return students; }

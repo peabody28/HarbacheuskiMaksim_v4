@@ -1,6 +1,5 @@
 #include "Course.h"
-using namespace university;
 
-Course::Course() {}
-unsigned int Course::GetNumber() { return number; }
+Course::Course(int _num) { number = _num; }
 
+int Course::GetNumber() { return number; }
