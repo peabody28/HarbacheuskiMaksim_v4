@@ -4,6 +4,7 @@
 #include <vector>
 #include "helpers.cpp"
 #define FILE_NAME "company.txt"
+#define CANNOT_OPEN_FILE_EXCEPTION "Cannot open file"
 
 using namespace std;
 
@@ -48,36 +49,62 @@ private:
     void GetReportFromTextFile(string fileName)
     {
         staff.clear();
-        ifstream f(fileName);
-
-        while (true)
+        try
         {
-            string name;
-            unsigned int salary;
-            unsigned short experience;
-            f >> name >> salary >> experience;
+            ifstream f(fileName);
 
-            if (name.size() == 0)
-                break;
+            if (!f.is_open())
+                throw CANNOT_OPEN_FILE_EXCEPTION;
 
-            Employee emp = Employee(name, salary, experience);
-            staff.push_back(emp);
+            while (true)
+            {
+                string name;
+                unsigned int salary;
+                unsigned short experience;
+                f >> name >> salary >> experience;
+
+                if (name.size() == 0)
+                    break;
+
+                Employee emp = Employee(name, salary, experience);
+                staff.push_back(emp);
+            }
+
+            f.close();
+        }
+        catch (const char* msg)
+        {
+            cout << string(msg) << endl;
+            terminate();
         }
 
-        f.close();
+        
     }
 
     void MakeReportToTextFile(string fileName)
     {
-        ofstream f(fileName);
-
-        for (auto item : staff)
+        try
         {
-            string row = item.ToString();
-            f << row << endl;
-        }
+            ofstream f(fileName);
 
-        f.close();
+            if (!f.is_open())
+                throw CANNOT_OPEN_FILE_EXCEPTION;
+
+
+            for (auto item : staff)
+            {
+                string row = item.ToString();
+                f << row << endl;
+            }
+
+            f.close();
+        }
+        catch (const char* msg)
+        {
+            cout << string(msg) << endl;
+            terminate();
+        }
+        
     }
 
 public:
@@ -96,24 +123,35 @@ public:
         }
 
         staff.clear();
-        ifstream f(fileName, ios_base::binary);
-
-        char employeeDataString[EMPLOYEE_STRING_DATA_LENGTH];
-        while (true) 
+        try
         {
-            FileHelper::GetLine(employeeDataString, EMPLOYEE_STRING_DATA_LENGTH, &f);
-            vector<string> data = StringHelper::Split(employeeDataString);
-            if (data.size() == 0) break;
+            ifstream f(fileName, ios_base::binary);
 
-            string name = string(data[0]);
-            unsigned int salary = StringHelper::ParseInt(data[1]);
-            unsigned short experience = StringHelper::ParseInt(data[2]);
+            if (!f.is_open())
+                throw CANNOT_OPEN_FILE_EXCEPTION;
 
-            Employee emp = Employee(name, salary, experience);
-            staff.push_back(emp);
+            char employeeDataString[EMPLOYEE_STRING_DATA_LENGTH];
+            while (true)
+            {
+                FileHelper::GetLine(employeeDataString, EMPLOYEE_STRING_DATA_LENGTH, &f);
+                vector<string> data = StringHelper::Split(employeeDataString);
+                if (data.size() == 0) break;
+
+                string name = string(data[0]);
+                unsigned int salary = StringHelper::ParseInt(data[1]);
+                unsigned short experience = StringHelper::ParseInt(data[2]);
+
+                Employee emp = Employee(name, salary, experience);
+                staff.push_back(emp);
+            }
+
+            f.close();
         }
-
-        f.close();
+        catch (const char* msg)
+        {
+            cout << string(msg) << endl;
+            terminate();
+        }
     }
 
     void MakeReport(string fileName, bool isBinary = false)
@@ -123,15 +161,26 @@ public:
             MakeReportToTextFile(fileName);
             return;
         }
-        ofstream f(fileName, ios_base::binary);
 
-        for (auto item : staff)
+        try
         {
-            string row = item.ToString();
-            FileHelper::WriteLine(row.c_str(), row.size(), &f);
-        }
+            ofstream f(fileName, ios_base::binary);
+            if (!f.is_open())
+                throw CANNOT_OPEN_FILE_EXCEPTION;
+            for (auto item : staff)
+            {
+                string row = item.ToString();
+                FileHelper::WriteLine(row.c_str(), row.size(), &f);
+            }
 
-        f.close();
+            f.close();
+        }
+        catch (const char* msg)
+        {
+            cout << string(msg) << endl;
+            terminate();
+        }
+        
     }
 
     void AddEmployee(Employee empl)
@@ -171,43 +220,65 @@ public:
 
     void PrintReverseData(string fileName, bool isBinary = false)
     {
-        ifstream f(fileName, ios_base::binary);
-        FileHelper::SetCursorToEnd(&f);
-
-        while (true)
+        try
         {
-            char employeeDataString[EMPLOYEE_STRING_DATA_LENGTH];
-            if (isBinary)
-                FileHelper::GetPrevLine(employeeDataString, EMPLOYEE_STRING_DATA_LENGTH, &f);
-            else
-                FileHelper::GetPrevLineFromTextFile(employeeDataString, &f);
+            ifstream f(fileName, ios_base::binary);
+            if (!f.is_open())
+                throw CANNOT_OPEN_FILE_EXCEPTION;
+            FileHelper::SetCursorToEnd(&f);
 
-            if (employeeDataString[0] == '\0')
-                return;
-            cout << employeeDataString << endl;
+            while (true)
+            {
+                char employeeDataString[EMPLOYEE_STRING_DATA_LENGTH];
+                if (isBinary)
+                    FileHelper::GetPrevLine(employeeDataString, EMPLOYEE_STRING_DATA_LENGTH, &f);
+                else
+                    FileHelper::GetPrevLineFromTextFile(employeeDataString, &f);
+
+                if (employeeDataString[0] == '\0')
+                    return;
+                cout << employeeDataString << endl;
+            }
+
+            f.close();
         }
-
-        f.close();
+        catch (const char* msg)
+        {
+            cout << string(msg) << endl;
+            terminate();
+        }
+       
     }
 
     void PrintData(string fileName, bool isBinary = false)
     {
 
-        ifstream f(fileName, ios_base::binary);
+        try {
+            ifstream f(fileName, ios_base::binary);
 
-        while (true)
-        {
-            char employeeDataString[EMPLOYEE_STRING_DATA_LENGTH];
-            if (isBinary)
-                FileHelper::GetLine(employeeDataString, EMPLOYEE_STRING_DATA_LENGTH, &f);
-            else
-                FileHelper::GetLineFromTextFile(employeeDataString, &f);
-            if (employeeDataString[0] == '\0')
-                return;
-            cout << employeeDataString << endl;
+            if (!f.is_open())
+                throw CANNOT_OPEN_FILE_EXCEPTION;
+
+            while (true)
+            {
+                char employeeDataString[EMPLOYEE_STRING_DATA_LENGTH];
+                if (isBinary)
+                    FileHelper::GetLine(employeeDataString, EMPLOYEE_STRING_DATA_LENGTH, &f);
+                else
+                    FileHelper::GetLineFromTextFile(employeeDataString, &f);
+                if (employeeDataString[0] == '\0')
+                    return;
+                cout << employeeDataString << endl;
+            }
+
+            f.close();
+            
         }
-
-        f.close();
+        catch (const char* msg)
+        {
+            cout << string(msg) << endl;
+            terminate();
+        }
     }
 };
 
